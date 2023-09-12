@@ -74,7 +74,9 @@ class JobController extends Controller
      */
     public function apply(Job $job): RedirectResponse
     {
-        auth()->user()->jobApplications()->attach($job);
+        if (!auth()->user()->jobApplications->contains($job)) {
+            auth()->user()->jobApplications()->attach($job);
+        }
         return redirect(route('jobs.index'));
     }
 

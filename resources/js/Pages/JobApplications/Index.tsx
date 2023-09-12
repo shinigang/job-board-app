@@ -21,12 +21,12 @@ export default function JobApplications() {
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
-            <div className="px-5 pb-5">
+            <div className="p-5">
               {jobApplications.length === 0 && (
                 <p className="text-center">No job applications yet.</p>
               )}
               {jobApplications.length > 0 && (
-                <ul className="d-flex mt-3 p-4 bg-gray-100 divide-y divide-gray-200 dark:divide-gray-700">
+                <ul className="d-flex p-4 bg-gray-100 divide-y divide-gray-200 dark:divide-gray-700">
                   {jobApplications.map(
                     ({
                       title: jobTitle,
