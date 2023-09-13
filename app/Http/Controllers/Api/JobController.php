@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\JobCollection;
+use App\Http\Resources\JobResource;
 use App\Models\Job;
 use Illuminate\Http\Request;
 
@@ -10,12 +12,14 @@ class JobController extends Controller
 {
     public function index(Request $request)
     {
-        return Job::all();
+        $jobs = Job::paginate();
+
+        return new JobCollection($jobs);
     }
 
     public function show(Job $job)
     {
-        return $job;
+        return new JobResource($job);
     }
 
     public function store(Request $request)
