@@ -125,10 +125,10 @@ export default function Catalog() {
 
   return (
     <AppLayout
-      title="Job Finder"
+      title="Jobs Catalog"
       renderHeader={() => (
         <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          Job Finder
+          Jobs Catalog
         </h2>
       )}
     >

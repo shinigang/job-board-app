@@ -238,7 +238,7 @@ export default function AppLayout({
                     </DropdownLink>
 
                     <DropdownLink href={route('job.applications')}>
-                      Job Applications
+                      Application History
                     </DropdownLink>
 
                     {page.props.jetstream.hasApiFeatures ? (
