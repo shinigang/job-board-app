@@ -12,7 +12,15 @@ class JobController extends Controller
 {
     public function index(Request $request)
     {
-        $jobs = Job::paginate();
+        $jobs = Job::latest();
+        $limit = $request->input('limit') ?? 100;
+        $keyword = $request->input('keyword');
+        if ($keyword) {
+            $jobs = $jobs->where('title', 'like', "%$keyword%")
+                ->orWhere('description', 'like', "%$keyword%")
+                ->orWhere('industry', 'like', "%$keyword%");
+        }
+        $jobs = $jobs->paginate($limit);
 
         return new JobCollection($jobs);
     }
