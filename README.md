@@ -23,6 +23,9 @@ Job Form Data:
 - industry (string)
 - available_slots (number, min: 1)
 
+Pre-requisite:  
+- Make sure you have Docker Desktop installed and running
+
 To run, just type the following in order:  
 `./vendor/bin/sail up`  
 `./vendor/bin/sail npm install`  
