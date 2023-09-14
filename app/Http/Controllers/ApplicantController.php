@@ -14,7 +14,7 @@ class ApplicantController extends Controller
     public function applications(): Response
     {
         return Inertia::render('JobApplications/Index', [
-            'applications' => auth()->user()->jobApplications()->latest()->get(),
+            'applications' => auth()->user()->jobApplications()->latest()->paginate(10),
         ]);
     }
 }

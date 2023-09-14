@@ -6,6 +6,7 @@ import useTypedPage from '@/Hooks/useTypedPage';
 import AppLayout from '@/Layouts/AppLayout';
 import { SearchIcon } from '@/Components/Icons';
 import JobCard from '@/Components/JobCard';
+import Pagination from '@/Components/Pagination';
 
 export default function Jobs() {
   const route = useRoute();
@@ -63,17 +64,17 @@ export default function Jobs() {
               </div>
             </form>
             <div className="px-5 pb-5">
-              {jobPostings.length === 0 && keyword === '' && (
+              {jobPostings.data.length === 0 && keyword === '' && (
                 <p className="text-center">No job postings yet.</p>
               )}
-              {jobPostings.length === 0 && keyword !== '' && (
+              {jobPostings.data.length === 0 && keyword !== '' && (
                 <p className="text-center">
                   No job postings found with keyword: "{keyword}".
                 </p>
               )}
-              {jobPostings.length > 0 && (
+              {jobPostings.data.length > 0 && (
                 <ul className="d-flex mt-3 p-4 bg-gray-100 divide-y divide-gray-200 dark:divide-gray-700">
-                  {jobPostings.map(
+                  {jobPostings.data.map(
                     ({
                       title: jobTitle,
                       description,
@@ -100,6 +101,7 @@ export default function Jobs() {
                 </ul>
               )}
             </div>
+            <Pagination className="px-5" links={jobPostings.links} />
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import AppLayout from '@/Layouts/AppLayout';
 import useTypedPage from '@/Hooks/useTypedPage';
 
 import JobCard from '@/Components/JobCard';
+import Pagination from '@/Components/Pagination';
 
 export default function JobApplications() {
   const page = useTypedPage();
@@ -22,12 +23,12 @@ export default function JobApplications() {
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
             <div className="p-5">
-              {jobApplications.length === 0 && (
+              {jobApplications.data.length === 0 && (
                 <p className="text-center">No job applications yet.</p>
               )}
-              {jobApplications.length > 0 && (
+              {jobApplications.data.length > 0 && (
                 <ul className="d-flex p-4 bg-gray-100 divide-y divide-gray-200 dark:divide-gray-700">
-                  {jobApplications.map(
+                  {jobApplications.data.map(
                     ({
                       title: jobTitle,
                       description,
@@ -54,6 +55,7 @@ export default function JobApplications() {
                 </ul>
               )}
             </div>
+            <Pagination className="px-5" links={jobApplications.links} />
           </div>
         </div>
       </div>

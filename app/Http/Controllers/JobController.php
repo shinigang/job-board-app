@@ -24,8 +24,8 @@ class JobController extends Controller
         }
 
         return Inertia::render('Jobs/Index', [
-            'jobs' => $jobs->get(),
-            'applications' => auth()->user()->jobApplications()->latest()->get(),
+            'jobs' => $jobs->paginate(10),
+            'allApplications' => auth()->user()->jobApplications()->get(),
             'keyword' => $keyword,
         ]);
     }
@@ -86,7 +86,7 @@ class JobController extends Controller
     public function catalog(): Response
     {
         return Inertia::render('Jobs/Catalog', [
-            'jobs' => Job::latest()->get(),
+            'jobs' => Job::latest()->paginate(10),
         ]);
     }
 }

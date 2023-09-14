@@ -1,16 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { router } from '@inertiajs/core';
 import { useForm } from '@inertiajs/react';
-
-import useRoute from '@/Hooks/useRoute';
-
-import useTypedPage from '@/Hooks/useTypedPage';
-import AppLayout from '@/Layouts/AppLayout';
-import { SearchIcon } from '@/Components/Icons';
-import JobCard from '@/Components/JobCard';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import AppLayout from '@/Layouts/AppLayout';
+import useRoute from '@/Hooks/useRoute';
+import useTypedPage from '@/Hooks/useTypedPage';
+import { SearchIcon } from '@/Components/Icons';
+import JobCard from '@/Components/JobCard';
+import Pagination from '@/Components/Pagination';
 
 export default function Catalog() {
   const jobFormRef = useRef<null | HTMLFormElement>(null);
@@ -90,7 +89,7 @@ export default function Catalog() {
   };
 
   const jobEditHandler = (jobId: number) => {
-    const jobToEdit = jobPostings.find(job => job.id === jobId);
+    const jobToEdit = jobPostings.data.find(job => job.id === jobId);
 
     if (jobToEdit) {
       setEditJobId(jobId);
@@ -108,7 +107,10 @@ export default function Catalog() {
 
   const jobsDeletedHandler = (jobId: number) => {
     setJobPostings(prevJobs => {
-      return prevJobs.filter(job => job.id !== jobId);
+      return {
+        data: prevJobs.data.filter(job => job.id !== jobId),
+        links: prevJobs.links,
+      };
     });
 
     toast.success('Job data was deleted!', {
@@ -279,17 +281,17 @@ export default function Catalog() {
             )}
 
             <div className="px-5 pb-5">
-              {jobPostings.length === 0 && keyword === '' && (
+              {jobPostings.data.length === 0 && keyword === '' && (
                 <p className="text-center">No job postings yet.</p>
               )}
-              {jobPostings.length === 0 && keyword !== '' && (
+              {jobPostings.data.length === 0 && keyword !== '' && (
                 <p className="text-center">
                   No job postings found with keyword: "{keyword}".
                 </p>
               )}
-              {jobPostings.length > 0 && (
+              {jobPostings.data.length > 0 && (
                 <ul className="d-flex mt-3 p-4 bg-gray-100 divide-y divide-gray-200 dark:divide-gray-700">
-                  {jobPostings.map(
+                  {jobPostings.data.map(
                     ({
                       title: jobTitle,
                       description,
@@ -316,6 +318,7 @@ export default function Catalog() {
                 </ul>
               )}
             </div>
+            <Pagination className="px-5" links={jobPostings.links} />
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ const JobCard = ({
   const deleteForm = useForm();
 
   const page = useTypedPage();
-  const appliedJobs = page.props.applications;
+  const appliedJobs = page.props.allApplications;
   const [isApplying, setIsApplying] = useState(false);
   const [hasApplied, setHasApplied] = useState(
     appliedJobs ? appliedJobs.findIndex(job => job.id === jobId) > -1 : false,

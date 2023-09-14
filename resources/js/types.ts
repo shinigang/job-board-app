@@ -12,6 +12,17 @@ export interface Job {
   updated_at: DateTime;
 }
 
+export interface Hyperlink {
+  url: string;
+  label: string;
+  active: boolean;
+}
+
+export interface PagedJobs {
+  links: Hyperlink[];
+  data: Job[];
+}
+
 export interface Team {
   id: number;
   name: string;
@@ -58,8 +69,9 @@ export type InertiaSharedProps<T = {}> = T & {
     hasEmailVerification: boolean;
   };
   auth: Auth;
-  applications: Job[];
-  jobs: Job[];
+  applications: PagedJobs;
+  jobs: PagedJobs;
+  allApplications: Job[];
   keyword: string;
   errorBags: any;
   errors: any;
