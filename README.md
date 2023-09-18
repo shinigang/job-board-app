@@ -27,10 +27,11 @@ Pre-requisite:
 - Make sure you have Docker Desktop installed and running
 
 To run, just type the following in order:  
-`./vendor/bin/sail up`  
-`./vendor/bin/sail npm install`  
-`./vendor/bin/sail npm run build`  
-`./vendor/bin/sail artisan migrate`
+- `cp .env.example .env`
+- `./vendor/bin/sail up`  
+- `./vendor/bin/sail npm install`  
+- `./vendor/bin/sail npm run build`  
+- `./vendor/bin/sail artisan migrate`
 
 Then on the browser, go to:  
 [Localhost](http://localhost)
