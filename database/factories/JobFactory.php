@@ -21,7 +21,7 @@ class JobFactory extends Factory
             'title' => $this->faker->jobTitle(),
             'description' => $this->faker->sentence(),
             'industry' => $this->faker->catchPhrase(),
-            'available_slots' => $this->faker->randomDigit(),
+            'available_slots' => $this->faker->randomDigitNot(0),
         ];
     }
 }

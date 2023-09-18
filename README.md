@@ -23,15 +23,39 @@ Job Form Data:
 - industry (string)
 - available_slots (number, min: 1)
 
-Pre-requisite:  
+Pre-requisite:
+
 - Make sure you have Docker Desktop installed and running
 
-To run, just type the following in order:  
-- `cp .env.example .env`
-- `./vendor/bin/sail up`  
-- `./vendor/bin/sail npm install`  
-- `./vendor/bin/sail npm run build`  
-- `./vendor/bin/sail artisan migrate`
+To run for the first time, just type the following in order:  
+`cp .env.example .env`
+
+```
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php82-composer:latest \
+    composer install --ignore-platform-reqs
+```
+
+`./vendor/bin/sail up -d`  
+`./vendor/bin/sail artisan key:generate`  
+`./vendor/bin/sail artisan migrate --seed`  
+`./vendor/bin/sail npm install`  
+`./vendor/bin/sail npm run build`
+
+If not, just run:  
+`./vendor/bin/sail up`  
+`./vendor/bin/sail npm install`  
+`./vendor/bin/sail npm run build`
+
+Note:
+
+- Set alias for ./vendor/bin/sail to sail by running...  
+  `alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'`
+- Then you can simply run  
+  `sail up`
 
 Then on the browser, go to:  
 [Localhost](http://localhost)
